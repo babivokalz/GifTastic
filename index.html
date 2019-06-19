@@ -15,51 +15,48 @@
     <title>Giftastic</title>
   </head>
   <body>
-    <div id="buttons">
-      <button data-dog="golden retriever">Golden Retriever</button>
-      <button data-dog="husky">Husky</button>
-      <button data-dog="dachshund">Dachshund</button>
-      <button data-dog="labrador retriever">Labrador Retriever</button>
-      <button data-dog="french bulldog">French Bulldog</button>
-      <button data-dog="pug">Pug</button>
-      <button data-dog="shiba inu">Shiba Inu</button>
-      <button data-dog="sheltie">Sheltie</button>
-      <button data-dog="pomeranian">Pomeranian</button>
-      <button data-dog="chow chow">Chow Chow</button>
-      <button data-dog="american bulldog">American Bulldog</button>
-      <button data-dog="beagle">Beagle</button>
-      <button data-dog="collie">Collie</button>
-      <button data-dog="irish setter">Irish Setter</button>
-      <button data-dog="chihuahua">Chihuahua</button>
+    <div class="col main">
+      <div id="buttons">
+        <button data-dog="golden retriever">Golden Retriever</button>
+        <button data-dog="husky">Husky</button>
+        <button data-dog="dachshund">Dachshund</button>
+        <button data-dog="labrador retriever">Labrador Retriever</button>
+        <button data-dog="french bulldog">French Bulldog</button>
+        <button data-dog="pug">Pug</button>
+        <button data-dog="shiba inu">Shiba Inu</button>
+        <button data-dog="sheltie">Sheltie</button>
+        <button data-dog="pomeranian">Pomeranian</button>
+        <button data-dog="chow chow">Chow Chow</button>
+        <button data-dog="american bulldog">American Bulldog</button>
+        <button data-dog="beagle">Beagle</button>
+        <button data-dog="collie">Collie</button>
+        <button data-dog="irish setter">Irish Setter</button>
+        <button data-dog="chihuahua">Chihuahua</button>
+      </div>
+    </div>
+
+    <div class="col sidebar">
+      <form>
+        <div id="search-bar">
+          <label class="input-label" for="formInputLabel"
+            >Add a Dog Breed</label
+          >
+          <input
+            class="input-box"
+            type="text"
+            id="search-input"
+            placeholder="blah"
+          />
+        </div>
+        <button type="submit" id="search-button" class="btn btn-1 btn-1a">
+          Submit
+        </button>
+      </form>
     </div>
 
     <div id="gifs-go-here"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">
-      $("button").on("click", function() {
-        var dog = $(this).attr("data-dog");
-        var queryURL =
-          "https://api.giphy.com/v1/gifs/search?q=" +
-          dog +
-          "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
-        $.ajax({ url: queryURL, method: "GET" }).then(function(response) {
-          var results = response.data;
-
-          for (var i = 0; i < results.length; i++) {
-            var gifDiv = $("<div>");
-            var rating = results[i].rating;
-            var p = $("<p>").text("Rating: " + rating);
-            var dogImage = $("<img>");
-            dogImage.attr("src", results[i].images.fixed_height.url);
-
-            gifDiv.prepend(p);
-            gifDiv.prepend(dogImage);
-
-            $("#gifs-go-here").prepend(gifDiv);
-          }
-        });
-      });
-    </script>
+    <script src="assets/javascript/giftastic.js"></script>
   </body>
 </html>
