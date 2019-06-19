@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
+    <!-- <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
-    />
+    /> -->
     <script src="assets/css/style.css"></script>
 
     <title>Giftastic</title>
@@ -32,6 +32,34 @@
       <button data-dog="irish setter">Irish Setter</button>
       <button data-dog="chihuahua">Chihuahua</button>
     </div>
+
+    <div id="gifs-go-here"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $("button").on("click", function() {
+        var dog = $(this).attr("data-dog");
+        var queryURL =
+          "https://api.giphy.com/v1/gifs/search?q=" +
+          dog +
+          "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
+        $.ajax({ url: queryURL, method: "GET" }).then(function(response) {
+          var results = response.data;
+
+          for (var i = 0; i < results.length; i++) {
+            var gifDiv = $("<div>");
+            var rating = results[i].rating;
+            var p = $("<p>").text("Rating: " + rating);
+            var dogImage = $("<img>");
+            dogImage.attr("src", results[i].images.fixed_height.url);
+
+            gifDiv.prepend(p);
+            gifDiv.prepend(dogImage);
+
+            $("#gifs-go-here").prepend(gifDiv);
+          }
+        });
+      });
+    </script>
   </body>
-  <script src="assets/javascript/giftastic.js"></script>
 </html>
