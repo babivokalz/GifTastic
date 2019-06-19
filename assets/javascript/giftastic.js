@@ -1,11 +1,11 @@
-function createButton() {
-  $("#buttons").empty();
-  var newButton = $("<button>");
-  newButton.attr("type", "button");
-  newButton.attr("class", "button-print btn btn-2 btn-2h");
-  newButton.attr("id");
-  $("#buttons").append(newButton);
-}
+// function createButton() {
+//   $("#buttons").empty();
+//   var newButton = $("<button>");
+//   newButton.attr("type", "button");
+//   newButton.attr("class", "button-print btn btn-2 btn-2h");
+//   newButton.attr("id");
+//   $("#buttons").append(newButton);
+// }
 $("button").on("click", function() {
   var dog = $(this).attr("data-dog");
   var queryURL =
@@ -31,4 +31,11 @@ $("button").on("click", function() {
       $("#gifs-go-here").prepend(gifDiv);
     }
   });
+});
+$(document).on("click", ".gifinfo", function() {
+  if ($(this).attr("src") == $(this).attr("url_still")) {
+    $(this).attr("src", $(this).attr("url_movie"));
+  } else {
+    $(this).attr("src", $(this).attr("url_still"));
+  }
 });
