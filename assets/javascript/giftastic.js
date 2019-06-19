@@ -1,11 +1,11 @@
-// function createButton() {
-//   $("#buttons").empty();
-//   var newButton = $("<button>");
-//   newButton.attr("type", "button");
-//   newButton.attr("class", "button-print btn btn-2 btn-2h");
-//   newButton.attr("id");
-//   $("#buttons").append(newButton);
-// }
+function createButton() {
+  $("#buttons").empty();
+  var newButton = $("<button>");
+  newButton.attr("type", "button");
+  newButton.attr("class", "button-print btn btn-2 btn-2h");
+  newButton.attr("id");
+  $("#buttons").append(newButton);
+}
 $("button").on("click", function() {
   var dog = $(this).attr("data-dog");
   var queryURL =
@@ -22,8 +22,8 @@ $("button").on("click", function() {
       var dogImage = $("<img>");
 
       dogImage.attr("src", results[i].images.fixed_height.url);
-      dogImage.attr("url_movie", data.images.original.url);
-      dogImage.attr("url_still", data.images.original_still.url);
+      dogImage.attr("url_movie", results[i].images.fixed_height.url);
+      dogImage.attr("url_still", results[i].images.fixed_height.url);
 
       gifDiv.prepend(p);
       gifDiv.prepend(dogImage);
