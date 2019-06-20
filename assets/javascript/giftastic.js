@@ -7,7 +7,7 @@ function createButton(buttonLabel) {
   });
   $("#buttons").append(newButton);
 }
-$("button button").on("click", function() {
+$("#buttons button").on("click", function() {
   var dog = $(this).attr("data-dog");
   populateGifs(dog);
 });
@@ -43,7 +43,7 @@ function populateGifs(dog) {
           dogImage.attr("data-state", "animate");
         }
       });
-      
+
       gifDiv.prepend(p);
       gifDiv.prepend(dogImage);
 
