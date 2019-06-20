@@ -23,7 +23,7 @@ $("button").on("click", function() {
 
       dogImage.attr("src", results[i].images.fixed_height.url);
       dogImage.attr("url_movie", results[i].images.fixed_height.url);
-      dogImage.attr("url_still", results[i].images.fixed_height.url);
+      dogImage.attr("url_still", results[i].images.fixed_height_still.url);
 
       gifDiv.prepend(p);
       gifDiv.prepend(dogImage);
@@ -38,4 +38,10 @@ $(document).on("click", ".gifinfo", function() {
   } else {
     $(this).attr("src", $(this).attr("url_still"));
   }
+  $(document).on("click", "#search-button", function() {
+    const buttonLabel = $("#search-input")
+      .val()
+      .trim();
+    $("#search-input").val("");
+  });
 });
