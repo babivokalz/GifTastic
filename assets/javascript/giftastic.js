@@ -1,9 +1,12 @@
-function createButton() {
-  $("#buttons").empty();
+function createButton(buttonLabel) {
+  //   $("#buttons").empty();
   var newButton = $("<button>");
-  newButton.attr("type", "button");
-  newButton.attr("class", "button-print btn btn-2 btn-2h");
-  newButton.attr("id");
+  newButton.text(buttonLabel);
+  newButton.on("click", function() {
+    newButton.attr("type", "button");
+    newButton.attr("class", "button-print btn btn-2 btn-2h");
+    newButton.attr("id");
+  });
   $("#buttons").append(newButton);
 }
 $("button").on("click", function() {
@@ -45,3 +48,4 @@ $(document).on("click", ".gifinfo", function() {
     $("#search-input").val("");
   });
 });
+createButton();
