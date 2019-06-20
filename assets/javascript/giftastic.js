@@ -3,14 +3,16 @@ function createButton(buttonLabel) {
   var newButton = $("<button>");
   newButton.text(buttonLabel);
   newButton.on("click", function() {
-    newButton.attr("type", "button");
-    newButton.attr("class", "button-print btn btn-2 btn-2h");
-    newButton.attr("id");
+    populateGifs(buttonLabel);
   });
   $("#buttons").append(newButton);
 }
-$("button").on("click", function() {
+$("button button").on("click", function() {
   var dog = $(this).attr("data-dog");
+  populateGifs(dog);
+});
+
+function populateGifs(dog) {
   var queryURL =
     "https://api.giphy.com/v1/gifs/search?q=" +
     dog +
@@ -25,27 +27,41 @@ $("button").on("click", function() {
       var dogImage = $("<img>");
 
       dogImage.attr("src", results[i].images.fixed_height.url);
-      dogImage.attr("url_movie", results[i].images.fixed_height.url);
-      dogImage.attr("url_still", results[i].images.fixed_height_still.url);
-
+      dogImage.attr("data-state", "animate");
+      dogImage.attr(
+        "data-state-still",
+        results[i].images.fixed_height_still.url
+      );
+      dogImage.attr("data-state-animate", results[i].images.fixed_height.url);
+      dogImage.on("click", function() {
+        const attribute = dogImage.attr("data-state");
+        if (attribute === "animate") {
+          dogImage.attr("src", dogImage.attr("data-state-still"));
+          dogImage.attr("data-state", "still");
+        } else {
+          dogImage.attr("src", dogImage.attr("data-state-animate"));
+          dogImage.attr("data-state", "animate");
+        }
+      });
+      
       gifDiv.prepend(p);
       gifDiv.prepend(dogImage);
 
       $("#gifs-go-here").prepend(gifDiv);
     }
   });
-});
+}
 $(document).on("click", ".gifinfo", function() {
   if ($(this).attr("src") == $(this).attr("url_still")) {
     $(this).attr("src", $(this).attr("url_movie"));
   } else {
     $(this).attr("src", $(this).attr("url_still"));
   }
-  $(document).on("click", "#search-button", function() {
-    const buttonLabel = $("#search-input")
-      .val()
-      .trim();
-    $("#search-input").val("");
-  });
 });
-createButton();
+$("#search-button").on("click", function() {
+  const buttonLabel = $("#search-input")
+    .val()
+    .trim();
+  $("#search-input").val("");
+  createButton(buttonLabel);
+});
