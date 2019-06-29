@@ -34,13 +34,14 @@ function populateGifs(dog) {
       );
       dogImage.attr("data-state-animate", results[i].images.fixed_height.url);
       dogImage.on("click", function() {
-        const attribute = dogImage.attr("data-state");
+        var thisDogImage = $(this);
+        const attribute = thisDogImage.attr("data-state");
         if (attribute === "animate") {
-          dogImage.attr("src", dogImage.attr("data-state-still"));
-          dogImage.attr("data-state", "still");
+          thisDogImage.attr("src", thisDogImage.attr("data-state-still"));
+          thisDogImage.attr("data-state", "still");
         } else {
-          dogImage.attr("src", dogImage.attr("data-state-animate"));
-          dogImage.attr("data-state", "animate");
+          thisDogImage.attr("src", thisDogImage.attr("data-state-animate"));
+          thisDogImage.attr("data-state", "animate");
         }
       });
 
@@ -51,13 +52,6 @@ function populateGifs(dog) {
     }
   });
 }
-$(document).on("click", ".gifinfo", function() {
-  if ($(this).attr("src") == $(this).attr("url_still")) {
-    $(this).attr("src", $(this).attr("url_movie"));
-  } else {
-    $(this).attr("src", $(this).attr("url_still"));
-  }
-});
 $("#search-button").on("click", function() {
   const buttonLabel = $("#search-input")
     .val()
